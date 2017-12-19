@@ -1,0 +1,24 @@
+fileFormatVersion: 2
+guid: 219dcfbd77aa0d64eb3ffa13f972463b
+timeCreated: 1512728493
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - playerCamera: {instanceID: 0}
+  - shopName: {fileID: 1553640219760626, guid: 1da358963e7ed934ea512606209ac91d, type: 2}
+  - interactableRange: {instanceID: 0}
+  - flamethrowerUI: {instanceID: 0}
+  - flameCounterText: {instanceID: 0}
+  - flameCounter: {instanceID: 0}
+  - rifleUI: {instanceID: 0}
+  - rifleCountertext: {instanceID: 0}
+  - rifleCounter: {instanceID: 0}
+  - revolverCounter: {instanceID: 0}
+  - revolverUI: {instanceID: 0}
+  - revolverCounterText: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
