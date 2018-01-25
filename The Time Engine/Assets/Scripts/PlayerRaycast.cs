@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class PlayerRaycast : MonoBehaviour
 {
     public RaycastHit hit;
+    public int health;
     //Weapon damage
     public int rifleDPS;
     //Weapon fire rate
@@ -27,6 +28,10 @@ public class PlayerRaycast : MonoBehaviour
     public GameObject uIManager;
     public GameObject playerCamera;
     public GameObject impact;
+    public GameObject muzzleFlash;
+    public GameObject flamethrowerGun;
+    public GameObject aR;
+    public GameObject revolverGun;
 
     // Use this for initialization
     void Start()
@@ -34,6 +39,7 @@ public class PlayerRaycast : MonoBehaviour
         rifleAmmoCounter = 100;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+        health = 100;
     }
 
     // Update is called once per frame
@@ -42,6 +48,7 @@ public class PlayerRaycast : MonoBehaviour
         Weapons();
         Ammo();
         Misc();
+        Death(); 
     }
 
     //Void containing weapons
@@ -59,6 +66,7 @@ public class PlayerRaycast : MonoBehaviour
                     {
                         rifleAmmoCounter -= 1;
                         rifleFire = false;
+                        muzzleFlash.GetComponent<ParticleSystem>().Play();
                         if (Physics.Raycast(transform.position, transform.forward, out hit, 1000f))
                         {
                             GameObject g = Instantiate(impact, hit.point, Quaternion.FromToRotation(Vector3.forward, hit.normal));
@@ -71,6 +79,10 @@ public class PlayerRaycast : MonoBehaviour
                     }
                 }
             }
+        }
+        else
+        {
+            muzzleFlash.GetComponent<ParticleSystem>().Stop();
         }
 
         //WeaponSelection/UI
@@ -135,33 +147,49 @@ public class PlayerRaycast : MonoBehaviour
         if (weaponSelection == 0)
         {
             rifle = true;
+            aR.SetActive(true);
         }
         else
         {
             rifle = false;
+            aR.SetActive(false);
         }
 
         if (weaponSelection == 1)
         {
             flamethrower = true;
+            flamethrowerGun.SetActive(true);
         }
         else
         {
             flamethrower = false;
+            flamethrowerGun.SetActive(false);
         }
 
+        /*
         if (weaponSelection == 2)
         {
             revolver = true;
+            revolverGun.SetActive(true);
         }
         else
         {
             revolver = false;
+            revolverGun.SetActive(false);
         }
+        */
 
         if (weaponSelection == 3)
         {
             weaponSelection = 0;
+        }
+    }
+
+    void Death()
+    {
+        if (health <= 0)
+        {
+            Destroy(gameObject);
         }
     }
 }
