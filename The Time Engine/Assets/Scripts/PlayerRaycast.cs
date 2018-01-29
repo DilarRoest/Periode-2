@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerRaycast : MonoBehaviour
 {
     public RaycastHit hit;
     public int health;
+    public bool dead;
     //Weapon damage
     public int rifleDPS;
     //Weapon fire rate
@@ -26,7 +28,7 @@ public class PlayerRaycast : MonoBehaviour
     //References
     public GameObject generalManager;
     public GameObject uIManager;
-    public GameObject playerCamera;
+    public GameObject player;
     public GameObject impact;
     public GameObject muzzleFlash;
     public GameObject flamethrowerGun;
@@ -88,7 +90,7 @@ public class PlayerRaycast : MonoBehaviour
         //WeaponSelection/UI
         if (flamethrower == true)
         {
-            playerCamera.GetComponent<Flamethrower>().ActivateFlamethrower();
+            GetComponent<Flamethrower>().ActivateFlamethrower();
             uIManager.GetComponent<GeneralUI>().flamethrower = true;
         }
         else
@@ -98,7 +100,7 @@ public class PlayerRaycast : MonoBehaviour
 
         if (revolver == true)
         {
-            playerCamera.GetComponent<Revolver>().revolverOcelot();
+            GetComponent<Revolver>().revolverOcelot();
             uIManager.GetComponent<GeneralUI>().revolver = true;
         }
         else
@@ -166,7 +168,6 @@ public class PlayerRaycast : MonoBehaviour
             flamethrowerGun.SetActive(false);
         }
 
-        /*
         if (weaponSelection == 2)
         {
             revolver = true;
@@ -177,11 +178,23 @@ public class PlayerRaycast : MonoBehaviour
             revolver = false;
             revolverGun.SetActive(false);
         }
-        */
 
         if (weaponSelection == 3)
         {
             weaponSelection = 0;
+        }
+
+        if (dead = true)
+        {
+            if (Input.GetButtonDown("Respawn"))
+            {
+                dead = false;
+                SceneManager.LoadScene("Beach");
+            }
+        }
+        if (health > 100)
+        {
+            health = 100;
         }
     }
 
@@ -189,7 +202,10 @@ public class PlayerRaycast : MonoBehaviour
     {
         if (health <= 0)
         {
-            Destroy(gameObject);
+            player.GetComponent<PlayerController>().allowMovement = false;
+            uIManager.GetComponent<GeneralUI>().DeathUi();
+            weaponSelection = 4;
+            dead = true;
         }
     }
 }

@@ -50,7 +50,7 @@ public class Enemy : MonoBehaviour
     {
         if (collision.gameObject.name == ("Player"))
         {
-            playerCamera.GetComponent<PlayerRaycast>().health -= 10;
+            playerCamera.GetComponent<PlayerRaycast>().health -= 25;
         }
     }
 

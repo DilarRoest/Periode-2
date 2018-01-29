@@ -28,8 +28,8 @@ public class GeneralManager : MonoBehaviour
         playerCamera.GetComponent<Flamethrower>().flamethrowerAmmo += fuel;
     }
 
-    public void RevolverBulletsRegain(int bullets)
+    public void Medkit(int health)
     {
-        playerCamera.GetComponent<Revolver>().revolverAmmo += bullets;
+        playerCamera.GetComponent<PlayerRaycast>().health += health;
     }
 }

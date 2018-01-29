@@ -12,22 +12,21 @@ public class GeneralUI : MonoBehaviour
     public GameObject flamethrowerMisc;
     public GameObject revolverCounter;
     public GameObject revolverMisc;
+    public GameObject gameOver;
+    public GameObject healthCounter;
+    public GameObject healthCounterMisc;
     public bool rifle;
     public bool flamethrower;
     public bool revolver;
 
-    // Use this for initialization
-    void Start ()
-    {
-
-    }
-	
+    
 	// Update is called once per frame
 	void Update ()
     {
         FlamethrowerActivation();
         RifleUIActivation();
         RevolverActivation();
+        Health();
     }
 
     public void RifleUIActivation ()
@@ -74,4 +73,24 @@ public class GeneralUI : MonoBehaviour
             revolverCounter.SetActive(false);
         }
     }        
+
+    public void Health()
+    {
+        healthCounter.GetComponent<Text>().text = playerCamera.GetComponent<PlayerRaycast>().health.ToString();
+    }
+
+    public void DeathUi()
+    {
+        gameOver.SetActive(true);
+        rifle = false;
+        flamethrower = false;
+        revolver = false;
+        healthDeactivate();
+    }
+
+    public void healthDeactivate()
+    {
+        healthCounter.SetActive(false);
+        healthCounterMisc.SetActive(false);
+    }
 }

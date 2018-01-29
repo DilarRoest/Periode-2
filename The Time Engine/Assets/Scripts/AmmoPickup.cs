@@ -9,7 +9,7 @@ public class AmmoPickup : MonoBehaviour
     public int amount;
     public bool rifleAmmo;
     public bool flamethrowerFuel;
-    public bool revolverBullets;
+    public bool medkit;
 
 	// Use this for initialization
 	void Start ()
@@ -23,7 +23,7 @@ public class AmmoPickup : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider hit)
+    public void OnTriggerEnter(Collider hit)
     {
         if (hit.gameObject.name == ("Player"))
         {
@@ -37,10 +37,9 @@ public class AmmoPickup : MonoBehaviour
                 managers.GetComponent<GeneralManager>().FlamethrowerFeulRegain(amount);
                 Destroy(gameObject);
             }
-            if (revolverBullets == true)
+            if (medkit == true)
             {
-                managers.GetComponent<GeneralManager>().RevolverBulletsRegain(amount);
-                Destroy(gameObject);
+                managers.GetComponent<GeneralManager>().Medkit(amount);
             }
         }
     }

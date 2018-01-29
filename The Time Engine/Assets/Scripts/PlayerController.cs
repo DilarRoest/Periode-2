@@ -15,31 +15,39 @@ public class PlayerController : MonoBehaviour
     public Rigidbody rigid;
     public Vector3 hight;
     public bool allowJump;
+    public bool allowMovement;
     public int doubleJump = 2;
+    
 
     // Update is called once per frame
     void Update()
     {
         // Player Movement 
-        horizontal = Input.GetAxis("Horizontal");
-        vertical = Input.GetAxis("Vertical");
-        v.x = horizontal;
-        v.z = vertical;
-        transform.Translate(v * Time.deltaTime * speed);
+        if (allowMovement == true)
+        {
+            horizontal = Input.GetAxis("Horizontal");
+            vertical = Input.GetAxis("Vertical");
+            v.x = horizontal;
+            v.z = vertical;
+            transform.Translate(v * Time.deltaTime * speed);
 
-        // Mouse Movement
-        mouse.y = Input.GetAxis("Mouse X");
-        mouse2.x = -Input.GetAxis("Mouse Y");
-        transform.Rotate(mouse);
-        cameraObject.transform.Rotate(mouse2);
+            // Mouse Movement
+            mouse.y = Input.GetAxis("Mouse X");
+            mouse2.x = -Input.GetAxis("Mouse Y");
+            transform.Rotate(mouse);
+            cameraObject.transform.Rotate(mouse2);
+        }
 
         // Jumping
-        if (allowJump == true)
+       if (allowMovement == true)
         {
-            if (Input.GetButtonDown("Jump") == true)
+            if (allowJump == true)
             {
-                rigid.velocity = hight;
-                doubleJump -= 1;
+                if (Input.GetButtonDown("Jump") == true)
+                {
+                    rigid.velocity = hight;
+                    doubleJump -= 1;
+                }
             }
         }
 
