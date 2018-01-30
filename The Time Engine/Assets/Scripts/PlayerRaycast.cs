@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 
 public class PlayerRaycast : MonoBehaviour
 {
@@ -26,7 +27,6 @@ public class PlayerRaycast : MonoBehaviour
     public RaycastHit hitShop;
     public bool interactableRange;
     //References
-    public GameObject generalManager;
     public GameObject uIManager;
     public GameObject player;
     public GameObject impact;
@@ -34,6 +34,7 @@ public class PlayerRaycast : MonoBehaviour
     public GameObject flamethrowerGun;
     public GameObject aR;
     public GameObject revolverGun;
+    public AudioSource source;
 
     // Use this for initialization
     void Start()
@@ -66,6 +67,7 @@ public class PlayerRaycast : MonoBehaviour
                 {
                     if (enoughRifleAmmo == true)
                     {
+                        source.Play();
                         rifleAmmoCounter -= 1;
                         rifleFire = false;
                         muzzleFlash.GetComponent<ParticleSystem>().Play();
@@ -192,9 +194,10 @@ public class PlayerRaycast : MonoBehaviour
                 SceneManager.LoadScene("Beach");
             }
         }
-        if (health > 100)
+
+        if (Input.GetKey("escape"))
         {
-            health = 100;
+            Application.Quit();
         }
     }
 

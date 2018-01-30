@@ -1,21 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class Enemy : MonoBehaviour
 {
-    public GameObject explosion;
-    private Transform player;
-    public Vector3 direction;
     public int health;
     public float speed;
+    public bool king;
+    public Vector3 direction;
+    public GameObject explosion;
     public GameObject playerCamera;
+    public GameObject victory;
+    private Transform player;
 
     // Use this for initialization
     void Start ()
     {
         player = GameObject.FindWithTag("Player").GetComponent<Transform>();
-        health = 100;
     }
 	
 	// Update is called once per frame
@@ -26,6 +28,10 @@ public class Enemy : MonoBehaviour
             Destroy(gameObject);
             GameObject g = Instantiate(explosion, transform.position, Quaternion.identity);
             Destroy(g, 3);
+            if (king == true)
+            {
+                victory.SetActive(true);
+            }
         }
     }
 
@@ -53,5 +59,4 @@ public class Enemy : MonoBehaviour
             playerCamera.GetComponent<PlayerRaycast>().health -= 25;
         }
     }
-
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GeneralManager : MonoBehaviour
 {
@@ -31,5 +32,18 @@ public class GeneralManager : MonoBehaviour
     public void Medkit(int health)
     {
         playerCamera.GetComponent<PlayerRaycast>().health += health;
+    }
+
+    void OnTriggerEnter(Collider trigger)
+    {
+        if (trigger.gameObject.name == ("Player"))
+        {
+            SceneManager.LoadScene("Boss Fight");
+        }
+    }
+
+    public void StartGame()
+    {
+        SceneManager.LoadScene("Beach");
     }
 }

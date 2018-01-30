@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class Revolver : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class Revolver : MonoBehaviour
     public int revolverDPS;
     public bool allowFire;
     public int revolverAmmo = 6;
-    public GameObject generalManager;
+    public AudioSource source;
 
     // Use this for initialization
     void Start ()
@@ -30,6 +31,7 @@ public class Revolver : MonoBehaviour
         {
             if (allowFire == true)
             {
+                source.Play();
                 revolverAmmo -= 1;
                 if (Physics.Raycast(transform.position, transform.forward, out hit, 1000f))
                 {
